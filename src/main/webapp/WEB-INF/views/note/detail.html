@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <center>
+        <a th:href="@{/list-note}">Back to list iNotes</a>
+        <table>
+            <tr>
+                <td>Title</td>
+                <td th:text="${note.getTitle()}"></td>
+            </tr>
+            <tr>
+                <td>Note Type</td>
+                <td th:text="${note.noteType.getName()}"></td>
+            </tr>
+            <tr>
+                <td>Content</td>
+                <td th:text="${note.content}"></td>
+            </tr>
+        </table>
+    </center>
+</body>
+</html>

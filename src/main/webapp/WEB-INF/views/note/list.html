@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"
+          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script
+            src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script
+            src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <style>
+        .table {
+            height: 600px;
+            width: 800px;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <h2>List iNotes</h2>
+    <a th:href="@{/list-type}">Back to list type note</a>
+    <a th:href="@{/create-note}">Create note</a>
+
+    <form th:action="@{/search-note}" method="get">
+        <select name="noteType">
+            <option th:each="p:${noteTypes}" th:value="${p.name}" th:text="${p.name}"></option>
+        </select>
+        <input type="submit" value="Search">
+    </form>
+    <!--        <table border="1px">-->
+    <!--            <tr>-->
+    <!--                <th>Title</th>-->
+    <!--                <th>Content</th>-->
+    <!--                <th>NoteType</th>-->
+    <!--                <th colspan="3">More option</th>-->
+    <!--            </tr>-->
+    <!--            <div th:each="note:${notes}">-->
+    <!--                <tr >-->
+    <!--                    <td th:text="${note.getTitle()}"></td>-->
+    <!--                    <td th:text="${note.getContent()}"></td>-->
+    <!--                    <td th:text="${note.noteType.name}"></td>-->
+    <!--                    <td>-->
+    <!--                        <a th:href="@{/edit/__${note.getId()}__}">Edit</a>-->
+    <!--                        <a th:href="@{/detail/__${note.getId()}__}">Detail</a>-->
+    <!--                        <a th:href="@{/delete/__${note.getId()}__}">Delete</a>-->
+    <!--                    </td>-->
+    <!--                </tr>-->
+
+    <!--            </div>-->
+
+    <!--        </table>-->
+    <table class="table" id="tables">
+        <thead class="thead-light">
+        <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>NoteType</th>
+            <th colspan="3">More option</th>
+        </tr>
+        </thead>
+        <tbody>
+        <div th:each="note:${notes}">
+            <tr>
+                <td th:text="${note.getTitle()}"></td>
+                <td th:text="${note.getContent()}"></td>
+                <td th:text="${note.noteType.name}"></td>
+                <td>
+                    <a th:href="@{/edit/__${note.getId()}__}">Edit</a>
+                    <a th:href="@{/detail/__${note.getId()}__}">Detail</a>
+                    <a th:href="@{/delete/__${note.getId()}__}">Delete</a>
+                </td>
+            </tr>
+        </div>
+        </tbody>
+    </table>
+
+    <div>
+        <a th:href="@{'/list-note'(page=${notes.number - 1})}" th:if="${notes.hasPrevious()}">Previous</a></li>
+        <a th:text="${notes.number + 1}"><span th:text="${notes.totalPages}"></span></a></li>
+        <a th:href="@{'/list-note'(page=${notes.number + 1})}" th:if="${notes.hasNext()}">Next</a></li>
+    </div>
+</center>
+
+</body>
+</html>

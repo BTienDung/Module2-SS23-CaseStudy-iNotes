@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NoteType</title>
+</head>
+<body>
+    <center>
+        <h2>List Note Type</h2>
+        <a th:href="@{/list-note}">List iNotes</a>
+        <table >
+            <tr>
+                <th>Name</th>
+                <th colspan="2">More option</th>
+            </tr>
+            <tr th:each="noteType:${NoteType}" border="1px">
+                <td th:text="${noteType.getName()}"></td>
+                <td>
+                    <a th:href="@{/edit-type/__${noteType.getId()}__}">Edit</a>
+                    <a th:href="@{/delete-type/__${noteType.getId()}__}">Delete</a>
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+</html>

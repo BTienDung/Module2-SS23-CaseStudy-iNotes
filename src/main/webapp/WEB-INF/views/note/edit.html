@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <center>
+        <a th:href="@{/list-note}">Back to List note</a>
+        <form th:action="@{/edit-note}" method="post" th:object="${note}">
+            <table>
+                <tr hidden>
+                    <td><input type="hidden" th:field="*{id}"></td>
+                </tr>
+                <tr>
+                    <td>Title</td>
+                    <td><input type="text" th:field="*{title}"></td>
+                </tr>
+                <tr>
+                    <td>Note Type</td>
+                    <td>
+                        <select name="noteType">
+                            <option th:each="p:${noteTypes}" th:value="${p.id}" th:text="${p.name}"  th:selected="(${p.id} == *{noteType.id})"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Content</td>
+                    <td><input type="text" th:field="*{content}"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" th:value="Edit">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </center>
+</body>
+</html>
